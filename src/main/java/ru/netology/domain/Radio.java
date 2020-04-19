@@ -4,7 +4,7 @@ public class Radio {
     private String name;
     private int currentRadioStation;
     private int currentSoundVolume;
-    private int maxRadioStation = 10;
+    private int maxRadioStation = 9;
     private int minRadioStation;
     private int maxVolume = 10;
     private int minVolume;
@@ -44,32 +44,20 @@ public class Radio {
     }
 
     public void increaseCurrentVolume() {
-
         int currentVolume = 0;
-        if (this.currentSoundVolume <= this.minVolume)
-            currentVolume = this.minVolume;
-        else
-            currentVolume = this.currentSoundVolume;
-        int nextVolume = currentVolume + 1;
+        int nextVolume = this.currentSoundVolume + 1;
         if (nextVolume > getMaxVolume()) {
-            return;
-        } else
-            currentVolume = this.currentSoundVolume;
+            return;}
             this.currentSoundVolume = nextVolume;
     }
 
     public void decreaseCurrentVolume() {
         int currentVolume = 0;
-        if (this.currentSoundVolume <= this.minVolume)
-            currentVolume = this.minVolume;
-        else
-            currentVolume = this.currentSoundVolume;
-
-        int previousVolume = currentVolume - 1;
+        int previousVolume = this.currentSoundVolume - 1;
         if (previousVolume < minVolume) {
-            previousVolume = minVolume;
-        } else
-            this.currentSoundVolume = previousVolume;
+            return;
+        }
+        this.currentSoundVolume = previousVolume;
     }
 
     public int getMaxRadioStation() {
