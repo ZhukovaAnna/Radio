@@ -4,7 +4,7 @@ public class Radio {
     private String name;
     private int currentRadioStation;
     private int currentSoundVolume;
-    private int maxRadioStation = 9;
+    private int maxRadioStation = 10;
     private int minRadioStation;
     private int maxVolume = 10;
     private int minVolume;
@@ -116,5 +116,7 @@ public class Radio {
             this.currentSoundVolume = this.minVolume;
             return;
         }
+        this.currentSoundVolume = currentSoundVolume;
+
     }
 }
