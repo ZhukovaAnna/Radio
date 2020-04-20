@@ -1,17 +1,36 @@
 package ru.netology.domain;
 
 public class Radio {
-    private String name;
     private int currentRadioStation;
     private int currentSoundVolume;
-    private int maxRadioStation = 9;
+    private int maxRadioStation = 10;
     private int minRadioStation;
-    private int maxVolume = 10;
+    private int maxVolume = 100;
     private int minVolume;
     private boolean on;
 
+    public Radio(int currentRadioStation,
+                 int currentSoundVolume,
+                 int maxRadioStation,
+                 int minRadioStation,
+                 int maxVolume,
+                 int minVolume,
+                 boolean on) {
+        this.currentRadioStation = currentRadioStation;
+        this.currentSoundVolume = currentSoundVolume;
+        this.maxRadioStation = maxRadioStation;
+        this.minRadioStation = minRadioStation;
+        this.maxVolume = maxVolume;
+        this.minVolume = minVolume;
+        this.on = on;
+    }
 
-    public int getCurrentRadioStation() {
+    public Radio() {
+    }
+
+
+    public int getCurrentRadioStation()
+    {
         return currentRadioStation;
     }
 
@@ -28,35 +47,57 @@ public class Radio {
     }
 
     public void nextRadioStation() {
+        int currentRadioStation = 0;
+        if (this.currentRadioStation <= this.minRadioStation)
+            currentRadioStation = this.minRadioStation;
+        else
+            currentRadioStation = this.currentRadioStation;
         int nextRadioStation = currentRadioStation + 1;
-        if (nextRadioStation > maxRadioStation) {
-            this.currentRadioStation = minRadioStation;
-        } else
-            this.currentRadioStation = nextRadioStation;
+        if (nextRadioStation > getMaxRadioStation()) {
+           nextRadioStation = minRadioStation;
+        }
+        this.currentRadioStation = nextRadioStation;
     }
 
     public void previousRadioStation() {
+        int currentRadioStation = 0;
+        if (this.currentRadioStation <= this.minRadioStation)
+            currentRadioStation = this.minRadioStation;
+        else
+            currentRadioStation = this.currentRadioStation;
         int previousRadioStation = currentRadioStation - 1;
-        if (previousRadioStation < minRadioStation) {
-            this.currentRadioStation = maxRadioStation;
-        } else
+        if (previousRadioStation < getMinRadioStation()) {
+            previousRadioStation = maxRadioStation;
+        }
             this.currentRadioStation = previousRadioStation;
     }
 
     public void increaseCurrentVolume() {
-        int nextVolume = this.currentSoundVolume + 1;
+        int currentVolume = 0;
+        if (this.currentSoundVolume <= this.minVolume)
+            currentVolume = this.minVolume;
+        else
+            currentVolume = this.currentSoundVolume;
+        int nextVolume = currentVolume + 1;
         if (nextVolume > getMaxVolume()) {
             return;
-        }
+        } else
+            currentVolume = this.currentSoundVolume;
         this.currentSoundVolume = nextVolume;
     }
 
     public void decreaseCurrentVolume() {
-        int previousVolume = this.currentSoundVolume - 1;
+        int currentVolume = 0;
+        if (this.currentSoundVolume <= this.minVolume)
+            currentVolume = this.minVolume;
+        else
+            currentVolume = this.currentSoundVolume;
+
+        int previousVolume = currentVolume - 1;
         if (previousVolume < minVolume) {
-            return;
-        }
-        this.currentSoundVolume = previousVolume;
+            previousVolume = minVolume;
+        } else
+            this.currentSoundVolume = previousVolume;
     }
 
     public int getMaxRadioStation() {
@@ -91,6 +132,7 @@ public class Radio {
     }
 
     public void setMinVolume(int minVolume) {
+
         this.minVolume = minVolume;
     }
 
@@ -112,9 +154,10 @@ public class Radio {
             this.currentSoundVolume = this.maxVolume;
             return;
         }
-        if (currentSoundVolume < minVolume) {
+        if (currentSoundVolume <= minVolume) {
             this.currentSoundVolume = this.minVolume;
             return;
         }
+        this.currentSoundVolume = currentSoundVolume;
     }
 }
